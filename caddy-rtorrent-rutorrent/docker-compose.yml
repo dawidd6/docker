@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  caddy:
+    image: abiosoft/caddy:no-stats
+    container_name: caddy
+    restart: always
+    environment:
+      - ACME_AGREE=true
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /opt/caddy/Caddyfile:/etc/Caddyfile
+      - /opt/caddy/cert:/root/.caddy
+  rutorrent:
+    image: linuxserver/rutorrent
+    container_name: rutorrent
+    restart: always
+    environment:
+      - PUID=1000
+      - PGID=1000
+    ports:
+      - 51110:51110
+    volumes:
+      - /home/dawidd6/rutorrent/config:/config
+      - /home/dawidd6/rutorrent/downloads:/downloads
