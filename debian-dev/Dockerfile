@@ -12,8 +12,6 @@ RUN echo "deb http://deb.debian.org/debian unstable main contrib non-free" > /et
 RUN echo "deb-src http://deb.debian.org/debian unstable main contrib non-free" >> /etc/apt/sources.list
 RUN useradd \
     --create-home \
-    --uid 1000 \
-    --gid 1000 \
     user
 RUN echo "user ALL=NOPASSWD: ALL" > /etc/sudoers
 
