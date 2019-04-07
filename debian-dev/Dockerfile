@@ -8,7 +8,12 @@ RUN apt-get install -y --no-install-recommends \
     sudo
 RUN echo "deb http://deb.debian.org/debian unstable main contrib non-free" > /etc/apt/sources.list
 RUN echo "deb-src http://deb.debian.org/debian unstable main contrib non-free" >> /etc/apt/sources.list
-RUN useradd user && echo "user ALL=NOPASSWD: ALL" > /etc/sudoers
+RUN useradd \
+    --create-home \
+    --uid 1000 \
+    --gid 1000 \
+    user
+RUN echo "user ALL=NOPASSWD: ALL" > /etc/sudoers
 
 USER user:user
 
