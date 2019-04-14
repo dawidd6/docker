@@ -1,6 +1,7 @@
 #!/bin/bash
 
 docker run \
+    --rm \
     -it \
     --name debian-dev \
     --hostname debian-dev \
@@ -8,5 +9,6 @@ docker run \
     -e DEBEMAIL \
     -v "$HOME/.gitconfig":"/home/user/.gitconfig":ro \
     -v "$HOME/.gnupg":"/home/user/.gnupg":ro \
+    -v "$HOME/deber":"/archive" \
     -v "$HOME/debian":"/workdir" \
     dawidd6/debian-dev
