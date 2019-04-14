@@ -4,15 +4,18 @@ RUN echo "deb http://deb.debian.org/debian unstable main contrib non-free" > /et
 RUN echo "deb-src http://deb.debian.org/debian unstable main contrib non-free" >> /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
+    reportbug \
     devscripts \
     git-buildpackage \
     pristine-tar \
+    debhelper \
     gnupg \
+    dh-make \
+    dh-make-golang \
     git \
     sudo
-RUN useradd \
-    --create-home \
-    user
+RUN groupadd --gid 999 docker
+RUN useradd --create-home -aG docker user
 RUN echo "user ALL=NOPASSWD: ALL" > /etc/sudoers
 
 USER user:user
