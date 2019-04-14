@@ -14,9 +14,7 @@ RUN apt-get install -y --no-install-recommends \
     dh-make-golang \
     git \
     sudo
-RUN groupadd --gid 999 docker
 RUN useradd --create-home user
-RUN usermod -aG docker user
 RUN echo "user ALL=NOPASSWD: ALL" > /etc/sudoers
 
 USER user:user
