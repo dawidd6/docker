@@ -4,6 +4,7 @@ RUN echo "deb http://deb.debian.org/debian unstable main contrib non-free" > /et
 RUN echo "deb-src http://deb.debian.org/debian unstable main contrib non-free" >> /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
+    lintian \
     reportbug \
     devscripts \
     git-buildpackage \
