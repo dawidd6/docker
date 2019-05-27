@@ -14,7 +14,8 @@ RUN apt-get install -y --no-install-recommends \
     dh-make \
     dh-make-golang \
     git \
-    sudo
+    sudo \
+    equivs
 RUN useradd --create-home user
 RUN echo "user ALL=NOPASSWD: ALL" > /etc/sudoers
 
