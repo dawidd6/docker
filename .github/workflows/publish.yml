@@ -1,0 +1,27 @@
+name: Publish images
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image:
+          - ruby-octokit
+    env:
+      VERSION: latest
+      USER: ${{github.event.repository.owner.login}}
+      PASS: ${{secrets.PASS}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Login
+        run: docker login -u $USER -p $PASS
+      - name: Build
+        run: docker build -t $USER/${{matrix.image}}:$VERSION ${{matrix.image}}
+      - name: Publish
+        run: docker push $USER/${{matrix.image}}:$VERSION
