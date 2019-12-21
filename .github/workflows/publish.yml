@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - '**/Dockerfile'
 
 jobs:
   main:
@@ -12,8 +14,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Publish
-        uses: dawidd6/action-docker-publish-changed@v1.0.0
+        uses: dawidd6/action-docker-publish-changed@master
         with:
           docker_username: ${{github.event.repository.owner.login}}
           docker_password: ${{secrets.PASS}}
           github_token: ${{secrets.GITHUB_TOKEN}}
+          platforms: linux/amd64,linux/arm64,linux/arm
