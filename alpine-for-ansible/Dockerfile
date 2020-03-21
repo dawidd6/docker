@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk -U add openssh-server sudo python3
+RUN apk -U add openssh-server openssh-sftp-server sudo python3
 RUN adduser -D user
 RUN passwd -u user
 RUN passwd -u root
