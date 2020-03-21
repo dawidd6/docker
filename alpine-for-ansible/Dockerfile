@@ -1,0 +1,17 @@
+FROM alpine
+
+RUN apk -U add openssh-server sudo python3
+RUN adduser -D user
+RUN passwd -u user
+RUN passwd -u root
+RUN echo "user ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers
+RUN echo "PasswordAuthentication no" > /etc/ssh/sshd_config
+RUN echo "PubkeyAuthentication yes" >> /etc/ssh/sshd_config
+RUN echo "AuthorizedKeysFile /etc/ssh/authorized_keys" >> /etc/ssh/sshd_config
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+
+RUN ssh-keygen -A
+
+COPY entrypoint.sh /
+
+ENTRYPOINT ["/entrypoint.sh"]
